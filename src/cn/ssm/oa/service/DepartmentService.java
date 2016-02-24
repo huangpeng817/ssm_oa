@@ -7,4 +7,12 @@ import cn.ssm.oa.po.Department;
 public interface DepartmentService {
 
 	List<Department> findAll() throws Exception;
+
+	void save(Department department) throws Exception;
+
+	void delete(Long id) throws Exception;
+
+	Department getById(Long id) throws Exception;
+
+	void update(Department department) throws Exception;
 }

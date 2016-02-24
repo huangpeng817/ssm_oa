@@ -22,5 +22,25 @@ public class DepartmentServiceImpl implements DepartmentService {
 		}
 		return departments;
 	}
+
+	@Override
+	public void save(Department department) throws Exception {
+		departmentMapper.insertSelective(department);
+	}
+
+	@Override
+	public void delete(Long id) throws Exception {
+		departmentMapper.deleteByPrimaryKey(id);
+	}
+
+	@Override
+	public Department getById(Long id) throws Exception {
+		return departmentMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public void update(Department department) throws Exception {
+		departmentMapper.updateByPrimaryKey(department);
+	}
 	
 }

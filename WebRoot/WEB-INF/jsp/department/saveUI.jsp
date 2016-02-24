@@ -22,8 +22,7 @@
 
 <!--显示表单内容-->
 <div id="MainArea">
-    <form action="<c:url value='/DepartmentServlet'/>" method="post">
-    	<input type="hidden" name="method" value="${empty editDept.id ? 'add' : 'edit' }">
+    <form action="<c:url value='/department/${empty editDept.id ? "add" : "edit" }.action'/>" method="post">
     	<input type="hidden" name="id" value="${editDept.id }">
         <div class="ItemBlock_Title1"><!-- 信息说明<DIV CLASS="ItemBlock_Title1">
         	<IMG BORDER="0" WIDTH="4" HEIGHT="7" SRC="${pageContext.request.contextPath }/style/blue/images/item_point.gif" /> 部门信息 </DIV>  -->

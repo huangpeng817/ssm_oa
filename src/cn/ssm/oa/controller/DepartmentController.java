@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,5 +26,35 @@ public class DepartmentController {
 		mv.addObject("departmentList", departmentList);
 		mv.setViewName("department/list");
 		return mv;
+	}
+	
+	@RequestMapping("/addUI")
+	public String addUI() throws Exception {
+		return "department/saveUI";
+	}
+	
+	@RequestMapping("/add")
+	public String add(Department department) throws Exception {
+		departmentService.save(department);
+		return "forward:list.action";
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(Long id) throws Exception {
+		departmentService.delete(id);
+		return "forward:list.action";
+	}
+	
+	@RequestMapping("/editUI")
+	public String editUI(Model model, Long id) throws Exception {
+		Department department = departmentService.getById(id);
+		model.addAttribute("editDept", department);
+		return "department/saveUI";
+	}
+	
+	@RequestMapping("/edit")
+	public String edit(Department department) throws Exception {
+		departmentService.update(department);
+		return "forward:list.action";
 	}
 }

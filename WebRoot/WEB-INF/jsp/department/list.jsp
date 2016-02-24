@@ -39,8 +39,8 @@
 				<td><a href="<c:url value='/DepartmentServlet?method=list&parentId=${department.id }'/>">${department.name }</a>&nbsp;</td>
 				<td>${department.parent.name }</td>
 				<td>${department.description }</td>
-				<td><a onclick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')" href="<c:url value='/DepartmentServlet?method=delete&id=${department.id }&parentId=${parent.id }'/>">删除</a>
-					<a href="<c:url value='/DepartmentServlet?method=editUI&id=${department.id }'/>">修改</a>
+				<td><a onclick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')" href="<c:url value='/department/delete.action?id=${department.id }&parentId=${parent.id }'/>">删除</a>
+					<a href="<c:url value='/department/editUI.action?id=${department.id }'/>">修改</a>
 				</td>
 			</tr>
 			</c:forEach>
@@ -50,7 +50,7 @@
     <!-- 其他功能超链接 -->
     <div id="TableTail">
         <div id="TableTail_inside">
-            <a href="<c:url value='/DepartmentServlet?method=addUI&pId=${parent.id }'/>"><img src="${pageContext.request.contextPath }/style/images/createNew.png"></a>
+            <a href="<c:url value='/department/addUI.action?pId=${parent.id }'/>"><img src="${pageContext.request.contextPath }/style/images/createNew.png"></a>
             <a href="<c:url value='/DepartmentServlet?method=list&parentId=${parent.parent.id }'/>">返回上一级</a>
         </div>
     </div>
