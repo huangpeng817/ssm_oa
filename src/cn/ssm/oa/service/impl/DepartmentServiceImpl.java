@@ -35,7 +35,10 @@ public class DepartmentServiceImpl implements DepartmentService {
 
 	@Override
 	public Department getById(Long id) throws Exception {
-		return departmentMapper.selectByPrimaryKey(id);
+		Department department = departmentMapper.selectByPrimaryKey(id);
+		Department parent = departmentMapper.selectByPrimaryKey(department.getParentid());
+		department.setParent(parent);
+		return department;
 	}
 
 	@Override
