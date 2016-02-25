@@ -20,8 +20,13 @@ public class DepartmentController {
 	private DepartmentService departmentService;
 	
 	@RequestMapping("/list")
-	public ModelAndView list() throws Exception {
-		List<Department> departmentList = departmentService.findAll();
+	public ModelAndView list(Long parentId) throws Exception {
+		List<Department> departmentList = null;
+		if (parentId == null) { // 顶级部门列表(默认加载顶级部门列表)
+			departmentList = departmentService.findTopList();
+		} else { // 当前部门的子部门
+			departmentList = departmentService.findChildren(parentId);
+		}
 		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("departmentList", departmentList);

@@ -15,4 +15,8 @@ public interface DepartmentService {
 	Department getById(Long id) throws Exception;
 
 	void update(Department department) throws Exception;
+
+	List<Department> findTopList() throws Exception;
+
+	List<Department> findChildren(Long parentId) throws Exception;
 }

@@ -36,7 +36,7 @@
         <tbody id="TableData" class="dataContainer" datakey="departmentList">
 			<c:forEach items="${departmentList }" var="department">
         	<tr class="TableDetail1 demodata_record">
-				<td><a href="<c:url value='/DepartmentServlet?method=list&parentId=${department.id }'/>">${department.name }</a>&nbsp;</td>
+				<td><a href="<c:url value='/department/list.action?parentId=${department.id }'/>">${department.name }</a>&nbsp;</td>
 				<td>${department.parent.name }</td>
 				<td>${department.description }</td>
 				<td><a onclick="return window.confirm('这将删除所有的下级部门，您确定要删除吗？')" href="<c:url value='/department/delete.action?id=${department.id }&parentId=${parent.id }'/>">删除</a>

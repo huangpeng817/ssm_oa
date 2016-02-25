@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import cn.ssm.oa.mapper.DepartmentMapper;
 import cn.ssm.oa.po.Department;
+import cn.ssm.oa.po.DepartmentExample;
+import cn.ssm.oa.po.DepartmentExample.Criteria;
 import cn.ssm.oa.service.DepartmentService;
 
 public class DepartmentServiceImpl implements DepartmentService {
@@ -44,6 +46,21 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Override
 	public void update(Department department) throws Exception {
 		departmentMapper.updateByPrimaryKey(department);
+	}
+
+	@Override
+	public List<Department> findTopList() throws Exception {
+		DepartmentExample example = new DepartmentExample();
+		Criteria criteria = example.createCriteria();
+		criteria.andParentidIsNull();
+		return departmentMapper.selectByExample(example);
+	}
+
+	@Override
+	public List<Department> findChildren(Long parentId) throws Exception {
+		DepartmentExample example = new DepartmentExample();
+		example.or().andParentidEqualTo(parentId);
+		return departmentMapper.selectByExample(example);
 	}
 	
 }
