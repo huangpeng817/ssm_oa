@@ -23,7 +23,7 @@ public class DepartmentController {
 	public ModelAndView list(Long parentId) throws Exception {
 		List<Department> departmentList = null;
 		Department parent = null;
-		if (parentId == null) { // 顶级部门列表(默认加载顶级部门列表)
+		if (parentId == null || parentId == 0) { // 顶级部门列表(默认加载顶级部门列表)
 			departmentList = departmentService.findTopList();
 		} else { // 当前部门的子部门
 			parent = departmentService.getById(parentId);
@@ -47,8 +47,10 @@ public class DepartmentController {
 	}
 	
 	@RequestMapping("/add")
-	public String add(Department department, @RequestParam("parentId") Long parentid) throws Exception {
-		department.setParentid(parentid);
+	public String add(Department department, Long parentId) throws Exception {
+		if (parentId != null && parentId != 0) {
+			department.setParentid(parentId);
+		}
 		departmentService.save(department);
 		return "forward:list.action";
 	}
@@ -70,7 +72,9 @@ public class DepartmentController {
 	
 	@RequestMapping("/edit")
 	public String edit(Department department, Long parentId) throws Exception {
-		department.setParentid(parentId);
+		if (parentId != null && parentId != 0) {
+			department.setParentid(parentId);
+		}
 		departmentService.update(department);
 		return "forward:list.action";
 	}

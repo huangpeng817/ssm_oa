@@ -38,6 +38,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 	@Override
 	public Department getById(Long id) throws Exception {
 		Department department = departmentMapper.selectByPrimaryKey(id);
+		if (department == null) {
+			return null;
+		}
 		Department parent = departmentMapper.selectByPrimaryKey(department.getParentid());
 		department.setParent(parent);
 		return department;
