@@ -1,5 +1,7 @@
 package cn.ssm.oa.po;
 
+import java.util.List;
+
 public class Department {
     private Long id;
 
@@ -10,8 +12,18 @@ public class Department {
     private Long parentid;
     
     private Department parent;
+    
+    private List<Department> children;
 
-    public Department getParent() {
+    public List<Department> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<Department> children) {
+		this.children = children;
+	}
+
+	public Department getParent() {
 		return parent;
 	}
 

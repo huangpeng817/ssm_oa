@@ -60,6 +60,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 		for (Department department : departments) {
 			Department parent = departmentMapper.selectByPrimaryKey(department.getParentid());
 			department.setParent(parent);
+			List<Department> children = findChildren(department.getId());
+			department.setChildren(children);
 		}
 		return departments;
 	}
@@ -72,6 +74,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 		for (Department department : departments) {
 			Department parent = departmentMapper.selectByPrimaryKey(department.getParentid());
 			department.setParent(parent);
+			List<Department> children = findChildren(department.getId());
+			department.setChildren(children);
 		}
 		return departments;
 	}
