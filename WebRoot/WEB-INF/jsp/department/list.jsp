@@ -51,7 +51,7 @@
     <div id="TableTail">
         <div id="TableTail_inside">
             <a href="<c:url value='/department/addUI.action?pId=${parent.id }'/>"><img src="${pageContext.request.contextPath }/style/images/createNew.png"></a>
-            <a href="<c:url value='/DepartmentServlet?method=list&parentId=${parent.parent.id }'/>">返回上一级</a>
+            <a href="<c:url value='/department/list.action?parentId=${parent.parent.id }'/>">返回上一级</a>
         </div>
     </div>
 </div>

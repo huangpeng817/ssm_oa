@@ -53,14 +53,24 @@ public class DepartmentServiceImpl implements DepartmentService {
 		DepartmentExample example = new DepartmentExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andParentidIsNull();
-		return departmentMapper.selectByExample(example);
+		List<Department> departments = departmentMapper.selectByExample(example);
+		for (Department department : departments) {
+			Department parent = departmentMapper.selectByPrimaryKey(department.getParentid());
+			department.setParent(parent);
+		}
+		return departments;
 	}
 
 	@Override
 	public List<Department> findChildren(Long parentId) throws Exception {
 		DepartmentExample example = new DepartmentExample();
 		example.or().andParentidEqualTo(parentId);
-		return departmentMapper.selectByExample(example);
+		List<Department> departments = departmentMapper.selectByExample(example);
+		for (Department department : departments) {
+			Department parent = departmentMapper.selectByPrimaryKey(department.getParentid());
+			department.setParent(parent);
+		}
+		return departments;
 	}
 	
 }

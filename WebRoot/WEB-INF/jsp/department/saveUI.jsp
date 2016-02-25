@@ -37,7 +37,7 @@
                                 <option value="0">请选择部门</option>
                                 <c:forEach items="${departmentList }" var="department">
 	                                <c:choose>
-	                                	<c:when test="${editDept.parent.id eq department.id }">
+	                                	<c:when test="${(empty parent ? editDept.parent.id : parent.id) eq department.id }">
 			                                <option value="${department.id }" selected="selected">${department.name }</option>
 	                                	</c:when>
 	                                	<c:otherwise>

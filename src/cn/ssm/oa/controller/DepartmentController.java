@@ -22,22 +22,27 @@ public class DepartmentController {
 	@RequestMapping("/list")
 	public ModelAndView list(Long parentId) throws Exception {
 		List<Department> departmentList = null;
+		Department parent = null;
 		if (parentId == null) { // 顶级部门列表(默认加载顶级部门列表)
 			departmentList = departmentService.findTopList();
 		} else { // 当前部门的子部门
+			parent = departmentService.getById(parentId);
 			departmentList = departmentService.findChildren(parentId);
 		}
 		
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("parent", parent);
 		mv.addObject("departmentList", departmentList);
 		mv.setViewName("department/list");
 		return mv;
 	}
 	
 	@RequestMapping("/addUI")
-	public String addUI(Model model) throws Exception {
+	public String addUI(Model model, Long pId) throws Exception {
 		List<Department> departmentList = departmentService.findAll();
 		model.addAttribute("departmentList", departmentList);
+		Department parent = departmentService.getById(pId);
+		model.addAttribute("parent", parent);
 		return "department/saveUI";
 	}
 	
